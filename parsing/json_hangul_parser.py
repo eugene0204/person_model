@@ -1,4 +1,4 @@
-from utils.reader.large_file_reader import BigSentences
+from utils.reader.gen_reader import BigSentences
 from utils.writer.csv_writer import CsvWriter
 import json
 import re
