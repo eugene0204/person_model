@@ -1,8 +1,10 @@
 from utils.reader.gen_reader import BigSentences
 from utils.writer.csv_writer import CsvWriter
+from utils.date.date import Date
+from tqdm import tqdm
+import multiprocessing as mp
 import json
 import re
-
 
 class JsonParser:
     def __init__(self, path):
@@ -10,7 +12,7 @@ class JsonParser:
 
     def read_file(self):
         hangul_sentences = []
-        for sent in self.sentences:
+        for sent in tqdm(self.sentences, desc="json pkarser"):
             try:
                 json_data = json.loads(sent)
                 text = json_data['text']
@@ -26,9 +28,10 @@ class JsonParser:
 
 
 if __name__ == "__main__":
-    path = "../data/raw_data/"
+    path = "../../data/raw_data/"
     parser = JsonParser(path)
     sentences = parser.read_file()
 
-    hangul_path = "../data/hangul_data/21_5_3.csv"
+    file_name = Date.get_today() + "_hagnul" + ".csv"
+    hangul_path = "../../data/hangul_data/" + file_name
     CsvWriter.write_csv(hangul_path, sentences)

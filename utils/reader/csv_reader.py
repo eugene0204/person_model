@@ -8,6 +8,6 @@ class CsvReader:
         with open(path, 'r') as f:
             reader = csv.reader(f)
             for row in reader:
-                rows.append(row)
+                rows.append("".join(row))
 
         return rows

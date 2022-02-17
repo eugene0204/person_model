@@ -2,7 +2,8 @@ import os
 
 
 class BigSentences:
-    def __init__(self, path):
+    def __init__(self, path, split=False):
+        self.split = split
         self.path = path
 
     def __iter__(self):
@@ -10,23 +11,14 @@ class BigSentences:
         for file in files:
             with open(os.path.join(self.path, file)) as f:
                 for line in f:
-                    yield line
-
-
-class W2vTrainingSentences:
-    def __init__(self, path):
-        self.path = path
-
-    def __iter__(self):
-        files = os.listdir(self.path)
-        for file in files:
-            with open(os.path.join(self.path, file)) as f:
-                for line in f:
-                    yield line.split()
+                    if self.split:
+                        yield line.split()
+                    else:
+                        yield line
 
 
 if __name__ == "__main__":
-    hangul_path = "../../data/hangul_data/"
+    hangul_path = "../../data/training_data/"
 
     sentences = BigSentences(hangul_path)
     for sent in sentences:
