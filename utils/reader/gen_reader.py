@@ -1,7 +1,7 @@
 import os
 
 
-class BigSentences:
+class BigSentence:
     def __init__(self, path, split=False):
         self.split = split
         self.path = path
@@ -17,9 +17,19 @@ class BigSentences:
                         yield line
 
 
+class BigFile:
+    def __init__(self, path):
+        self.path = path
+
+    def __iter__(self):
+        with open(self.path) as f:
+            for line in f:
+                yield line
+
+
 if __name__ == "__main__":
     hangul_path = "../../data/training_data/"
 
-    sentences = BigSentences(hangul_path)
+    sentences = BigSentence(hangul_path)
     for sent in sentences:
         pass

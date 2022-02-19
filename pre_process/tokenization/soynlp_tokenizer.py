@@ -1,4 +1,4 @@
-from utils.reader.gen_reader import BigSentences
+from utils.reader.gen_reader import BigSentence
 from utils.reader.csv_reader import CsvReader
 from utils.writer.csv_writer import CsvWriter
 from soynlp.noun import LRNounExtractor_v2
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     nouns_path = "data/noun/nouns.csv"
     tokenizer = SoyNlpTokenizer()
 
-    sentences = BigSentences(training_path)
+    sentences = BigSentence(training_path)
 
     extracted_nouns = tokenizer.train_extract(sentences)
     new_nouns = tokenizer.get_nouns_list(extracted_nouns)
