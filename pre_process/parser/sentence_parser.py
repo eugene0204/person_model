@@ -18,28 +18,24 @@ class SentsParser:
         _file_name = Date.get_today() + "_training" + ".csv"
         self.noun_sentence_path += _file_name
 
-    def _get_hangul_sents(self, sentences, nouns):
+    def _get_hangul_sents(self, sentences, nouns: set):
         noun_sents = []
-        words = []
         proc_name = multiprocessing.current_process().name
 
         for sent in tqdm(sentences, desc=proc_name + "-sents parser"):
-            words.clear()
-            split = sent.split()
-            for word in split:
-                if word in nouns and len(word) > 1:
-                    words.append(word)
+            sent_ = set(sent.split())
 
-            if len(words) > 1:
-                join_ = " ".join(words)
-                noun_sents.append(str(join_))
+            commons = sent_ & nouns
+
+            if commons and len(commons) > 1:
+                noun_sents.append(" ".join(commons))
 
         noun_sents = list(set(noun_sents))
 
         self.queue.put(noun_sents)
 
     def _split_sentences(self):
-        chunk_size = 10000
+        chunk_size = 100000
         sentences_ = self._get_sentences()
 
         split_sents = []
@@ -73,15 +69,15 @@ class SentsParser:
 
         return hangul_sentences
 
-    def _get_nouns(self):
+    def _get_nouns(self) -> set:
         nouns = CsvReader.read_file(self.nouns_path)
-        return nouns
+        return set(nouns)
 
     def _get_sentences(self):
         sentences = BigSentence(self.hangul_path)
         return sentences
 
-    def start(self):
+    def start_mutiprc(self):
         split_sent = self._split_sentences()
         nouns = self._get_nouns()
 
@@ -94,6 +90,15 @@ class SentsParser:
         for p in processes:
             p.join()
 
+    def start(self):
+        split_sent = self._split_sentences()
+        nouns = self._get_nouns()
+
+        for sent in split_sent:
+            self._get_hangul_sents(sent, nouns)
+
+
+
     def write_file(self):
         noun_sents = self._get_noun_sents()
         CsvWriter.write_csv(path=self.noun_sentence_path,
@@ -103,7 +108,7 @@ class SentsParser:
 if __name__ == "__main__":
     parser = SentsParser()
 
-    parser.start()
+    parser.start_mutiprc()
     parser.write_file()
 
 

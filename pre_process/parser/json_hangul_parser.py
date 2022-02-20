@@ -1,5 +1,4 @@
 import os
-
 from utils.reader.gen_reader import BigSentence, BigFile
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
@@ -10,7 +9,7 @@ import multiprocessing as mp
 import json
 import re
 
-
+#For json format file
 class JsonParser:
 
     def read_file(self, sentences):
@@ -67,6 +66,9 @@ def start_multiprc(file_gens_, queue: Queue):
         print("process start")
         p.start()
 
+    for p in processes:
+        print("join")
+        p.join()
 
     return processes
 
@@ -79,9 +81,6 @@ if __name__ == "__main__":
     files_gens = parser.get_file_generators(path)
     processes = start_multiprc(files_gens, queue)
 
-    for p in processes:
-        print("join")
-        p.join()
 
     res = []
     while not queue.empty():
