@@ -5,47 +5,54 @@ from soynlp.noun import LRNounExtractor_v2
 import csv
 
 
-
 class SoyNlpTokenizer:
-    def __init__(self):
-        pass
+    def __init__(self, hangul_path, noun_path):
+        self.hangul_data_path = hangul_path
+        self.nouns_data_path = noun_path
 
-    def train_extract(self, sentences):
+    def _train_extract(self):
+        sentences = self._get_raw_data()
         noun_extractor = LRNounExtractor_v2(verbose=True, extract_compound=True)
         return noun_extractor.train_extract(sentences)
 
-    def get_nouns_list(self, nouns) -> list:
-        noun_list = []
-        for noun_ in nouns:
-            if len(noun_) > 1:
-                noun_list.append(noun_)
+    def _get_nouns_list(self, nouns) -> list:
+        noun_list = [noun for noun in nouns if len(noun) > 1]
 
         return noun_list
 
+    def _get_raw_data(self):
+        sentences = BigSentence(self.hangul_data_path)
+
+        return sentences
+
+    def start(self):
+        extracted_nouns = self._train_extract()
+        new_nouns = self._get_nouns_list(extracted_nouns)
+
+        old_nouns = []
+        try:
+            old_nouns = CsvReader.read_file(self.nouns_data_path)
+        except FileNotFoundError as e:
+            print(e)
+            pass
+
+        if old_nouns:
+            nouns = old_nouns + new_nouns
+            nouns = list(set(nouns))
+        else:
+            nouns = new_nouns
+
+
+        print(f"old noun size: {len(old_nouns)}")
+        CsvWriter.write_csv(self.nouns_data_path, nouns)
+        print(f"new noun size: {len(nouns)}")
+
 
 if __name__ == "__main__":
-    training_path = "data/training_data/"
-    nouns_path = "data/noun/nouns.csv"
     tokenizer = SoyNlpTokenizer()
+    tokenizer.start()
 
-    sentences = BigSentence(training_path)
 
-    extracted_nouns = tokenizer.train_extract(sentences)
-    new_nouns = tokenizer.get_nouns_list(extracted_nouns)
-
-    old_nouns = []
-    try:
-        old_nouns = CsvReader.read_file(nouns_path)
-    except FileNotFoundError as e:
-        print(e)
-
-    if old_nouns:
-        nouns = old_nouns + new_nouns
-        nouns = list(set(nouns))
-    else:
-        nouns = new_nouns
-
-    CsvWriter.write_csv(nouns_path, nouns)
 
 
 
