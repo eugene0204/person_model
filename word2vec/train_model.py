@@ -1,4 +1,4 @@
-from utils.reader.gen_reader import BigSentence
+from utils.reader.gen_reader import BigCorpora
 from gensim.models import Word2Vec
 import logging
 import multiprocessing
@@ -8,7 +8,7 @@ cpu_count = multiprocessing.cpu_count()
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 train_path = "../data/training_data/"
-train_data = BigSentence(train_path, split=True)
+train_data = BigCorpora(train_path, split=True)
 
 
 model_path = "./model/w2v_model"

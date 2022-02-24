@@ -1,7 +1,7 @@
 import os
 
 
-class BigSentence:
+class BigCorpora:
     def __init__(self, path, split=False):
         self.split = split
         self.path = path
@@ -30,6 +30,6 @@ class BigFile:
 if __name__ == "__main__":
     hangul_path = "../../data/training_data/"
 
-    sentences = BigSentence(hangul_path)
+    sentences = BigCorpora(hangul_path)
     for sent in sentences:
         pass

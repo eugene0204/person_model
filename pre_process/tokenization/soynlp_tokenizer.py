@@ -1,4 +1,4 @@
-from utils.reader.gen_reader import BigSentence
+from utils.reader.gen_reader import BigCorpora
 from utils.reader.csv_reader import CsvReader
 from utils.writer.csv_writer import CsvWriter
 from soynlp.noun import LRNounExtractor_v2
@@ -21,7 +21,7 @@ class SoyNlpTokenizer:
         return noun_list
 
     def _get_raw_data(self):
-        sentences = BigSentence(self.hangul_data_path)
+        sentences = BigCorpora(self.hangul_data_path)
 
         return sentences
 

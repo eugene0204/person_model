@@ -1,6 +1,6 @@
 import multiprocessing
 
-from utils.reader.gen_reader import BigSentence
+from utils.reader.gen_reader import BigCorpora
 from utils.reader.csv_reader import CsvReader
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
@@ -75,7 +75,7 @@ class NounParser:
         return set(nouns)
 
     def _get_sentences(self):
-        sentences = BigSentence(self.hangul_data_path)
+        sentences = BigCorpora(self.hangul_data_path)
         return sentences
 
     def start_mutiprc(self):

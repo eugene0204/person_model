@@ -1,5 +1,5 @@
 import os
-from utils.reader.gen_reader import BigSentence, BigFile
+from utils.reader.gen_reader import BigCorpora, BigFile
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
 from tqdm import tqdm

@@ -1,7 +1,7 @@
 from multiprocessing import Process, Queue, current_process, Manager
 from tqdm import tqdm
 from utils.reader.gen_reader import BigFile
-from utils.reader.gen_reader import BigSentence
+from utils.reader.gen_reader import BigCorpora
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
 import os
@@ -96,7 +96,7 @@ class TextParser:
         self._write_file(hangul_sentences)
 
     def start(self):
-        sentences = BigSentence(self.raw_data_path)
+        sentences = BigCorpora(self.raw_data_path)
         hangul_sentences = self._read_file(sentences)
 
         file_name = Date.get_today() + "_hagnul" + ".csv"
