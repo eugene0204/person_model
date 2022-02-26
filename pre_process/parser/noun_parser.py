@@ -26,10 +26,10 @@ class NounParser:
         for sent in tqdm(sentences, desc=proc_name + "-sents parser"):
             sent_ = set(sent.split())
 
-            commons = sent_ & nouns
+            intersection = sent_ & nouns
 
-            if commons and len(commons) > 1:
-                noun_sents.append(" ".join(commons))
+            if intersection and len(intersection) > 1:
+                noun_sents.append(" ".join(intersection))
 
         noun_sents = list(set(noun_sents))
 
@@ -108,8 +108,7 @@ class NounParser:
 
 
 if __name__ == "__main__":
-    parser = NounParser()
-    parser.start_mutiprc()
+    pass
 
 
 

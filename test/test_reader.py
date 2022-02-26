@@ -1,5 +1,6 @@
 import unittest
 from utils.reader.csv_reader import CsvReader
+
 from collections import Counter
 
 class ReaderTest(unittest.TestCase):
@@ -10,9 +11,6 @@ class ReaderTest(unittest.TestCase):
     def test_read_csv_file(self):
         res = CsvReader.read_file(self.filter_path)
         self.assertTrue(Counter(self.test_lst) == Counter(res))
-
-    
-
 
 if __name__ == "__main__":
     unittest.main()

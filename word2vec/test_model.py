@@ -8,21 +8,19 @@ model_name = "./model/w2v_model"
 model = KeyedVectors.load(model_name, mmap='r')
 vocab = model.wv.key_to_index
 
-test_list = ("주가조작", "곽상도", "이영애", "정우성", "사조영웅전", )
+test_list = ("아이폰", "푸틴", "우크라이나", "전쟁")
+
 
 filter = Filter()
 
 
 for name in test_list:
-    is_filter = True
     print(name)
     try:
         res = model.wv.most_similar(name, topn=100)
-        if is_filter:
-            filter.filter_model(res)
-            print("")
-        else:
-            print(res)
+        filter.filter_model(res)
+        print("")
+        print(res)
 
     except KeyError as e:
         print(e)

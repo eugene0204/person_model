@@ -7,7 +7,7 @@ def start():
     raw_data_path = "./data/raw_data/"
     hangul_data_path = "./data/hangul_data/"
     training_data_path = "./data/training_data/"
-    noun_data_path = "./pre_process/tokenization/data/noun/nouns.csv"
+    noun_data_path = "data/noun_data/nouns.csv"
 
     hangul_parser = TextParser(raw_path=raw_data_path, hangul_path=hangul_data_path)
     tokenizer = SoyNlpTokenizer(hangul_path=hangul_data_path, noun_path=noun_data_path)
