@@ -9,3 +9,4 @@ class CsvWriter:
 
             for sent in sentences:
                 writer.writerow([sent])
+

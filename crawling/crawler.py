@@ -1,5 +1,7 @@
 import urllib.request
 import requests
+import time
+import schedule
 from bs4 import BeautifulSoup as bs
 import json
 from datetime import datetime
@@ -88,9 +90,9 @@ class Crawler:
             topics = new_topics
 
         CsvWriter.write_csv(self.filter_path, topics)
+        print(len(topics))
 
-
-if __name__ == "__main__" :
+def start():
     crawler = Crawler()
 
     crawler.naver_movie_crawler()
@@ -100,3 +102,10 @@ if __name__ == "__main__" :
     crawler.get_all_topics()
 
     crawler.write_file()
+
+schedule.every(10).minutes.do(start)
+
+if __name__ == "__main__" :
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

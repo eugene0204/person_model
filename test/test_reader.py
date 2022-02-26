@@ -11,6 +11,8 @@ class ReaderTest(unittest.TestCase):
         res = CsvReader.read_file(self.filter_path)
         self.assertTrue(Counter(self.test_lst) == Counter(res))
 
+    
+
 
 if __name__ == "__main__":
     unittest.main()
