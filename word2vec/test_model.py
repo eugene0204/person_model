@@ -1,23 +1,51 @@
 from gensim.models import KeyedVectors
 from utils.reader.csv_reader import CsvReader
-from filtering.Filter import Filter
+from filtering.filter import Filter
 
-model_name = "./model/null_w2v_model"
 
-model = KeyedVectors.load(model_name, mmap='r')
-vocab = model.wv.key_to_index
+class TestModel:
+    def __init__(self):
+        self.model_name = "./model/null_w2v_model"
+        self.model = KeyedVectors.load(self.model_name, mmap='r')
+        self.vocab = self.model.wv.key_to_index
+        self.test_list = ("짜장면", "짬뽕", "문재인", "이재명", "윤석열", "심상정", "안철수")
+        self.filter = Filter()
 
-test_list = ("알파고", "짜장면", "짬뽕", "문재인", "이재명", "윤석열", "심상정", "안철수")
+    def show_test_list(self):
+        for name in self.test_list:
+            print(name)
+            try:
+                res = self.model.wv.most_similar(name, topn=100)
+                self.filter.filter_model(res)
+                print("")
+                print(res)
 
-filter = Filter()
+            except KeyError as e:
+                print(e)
 
-for name in test_list:
-    print(name)
-    try:
-        res = model.wv.most_similar(name, topn=100)
-        filter.filter_model(res)
-        print("")
-        print(res)
+    def show_most_similar(self, keyword):
+        try:
+            res = self.model.wv.most_similar(keyword, topn=100)
+            self.filter.filter_model(res)
+            print("")
+            print(res)
+            return
 
-    except KeyError as e:
-        print(e)
+        except KeyError as e:
+            print(e)
+
+
+
+if __name__ == "__main__":
+    model = TestModel()
+    while True:
+        cmd = input(">> ")
+        if cmd == "exit":
+            break
+        elif cmd == "show":
+            model.show_test_list()
+
+        model.show_most_similar(cmd)
+
+
+
