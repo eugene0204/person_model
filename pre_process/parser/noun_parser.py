@@ -8,10 +8,10 @@ from tqdm import tqdm
 from multiprocessing import Manager, Process
 
 
-class NounParser:
-    def __init__(self, hangul_path, noun_path, training_path):
-        self.hangul_data_path = hangul_path
-        self.nouns__data_path = noun_path
+class NounOnlySentParser:
+    def __init__(self, clean_path, noun_path, training_path):
+        self.clean_sent_path = clean_path
+        self.nouns_data_path = noun_path
         self.training_data_path = training_path
 
         _file_name = Date.get_today() + "_training" + ".csv"
@@ -71,11 +71,11 @@ class NounParser:
         return hangul_sentences
 
     def _get_nouns(self) -> set:
-        nouns = CsvReader.read_file(self.nouns__data_path)
+        nouns = CsvReader.read_file(self.nouns_data_path)
         return set(nouns)
 
     def _get_sentences(self):
-        sentences = BigCorpora(self.hangul_data_path)
+        sentences = BigCorpora(self.clean_sent_path)
         return sentences
 
     def start_mutiprc(self):

@@ -16,7 +16,9 @@ sentences = BigCorpora(train_path, split=True)
 #     pass
 
 
-model_path = "./model/w2v_model"
+#model_path = "./model/w2v_model"
+model_path = "./model/null_w2v_model"
+
 model = Word2Vec.load(model_path)
 old_size = len(model.wv)
 

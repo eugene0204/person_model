@@ -3,9 +3,9 @@ from utils.reader.csv_reader import CsvReader
 
 class Filter:
     def __init__(self):
-        self.my_filter_path = "../data/filter/my_filter.csv"
-        self.crawler_filter_path = "../data/filter/crawler_filter.csv"
-        self.test_filter_path = "../data/filter/test_filter.csv"
+        self.my_filter_path = "../data/filter_data/my_filter.csv"
+        self.crawler_filter_path = "../data/filter_data/crawler_filter.csv"
+        self.test_filter_path = "../data/filter_data/test_filter.csv"
 
     def combine_filters(self):
         my_filter = CsvReader.read_file(self.my_filter_path)

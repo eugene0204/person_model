@@ -4,9 +4,9 @@ import unittest
 
 class FilterTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.my_filter_path = "../data/filter/my_filter.csv"
-        self.crawler_filter_path = "../data/filter/crawler_filter.csv"
-        self.test_filter_path = "../data/filter/test_filter.csv"
+        self.my_filter_path = "../data/filter_data/my_filter.csv"
+        self.crawler_filter_path = "../data/filter_data/crawler_filter.csv"
+        self.test_filter_path = "../data/filter_data/test_filter.csv"
 
     def test_combine_filters(self):
         my_filter = CsvReader.read_file(self.my_filter_path)

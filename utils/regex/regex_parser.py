@@ -14,18 +14,21 @@ class RegexParser:
         RT = "RT"
 
         split = sent.split()
-        if RT == split[0]:
-            split = split[1:]
-            sent = " ".join(split)
+        try:
+            if RT == split[0]:
+                split = split[1:]
+                sent = " ".join(split)
 
-        url_pattern = r"(http\S+)"
-        sent = re.sub(url_pattern, "", sent)
+            url_pattern = r"(http\S+)"
+            sent = re.sub(url_pattern, "", sent)
 
-        id_pattern = r"@\S+"
-        sent = re.sub(id_pattern, "", sent)
+            id_pattern = r"@\S+"
+            sent = re.sub(id_pattern, "", sent)
 
-        pattern = '[\uAC00-\uD7AF\d\u0041-\u005A\u0061-\u007A\u0025]+'
-        sent = re.findall(pattern, sent)
+            pattern = '[\uAC00-\uD7AF\d\u0041-\u005A\u0061-\u007A\u0025]+'
+            sent = re.findall(pattern, sent)
+        except IndexError as e:
+            pass
 
         return sent
 

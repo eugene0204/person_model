@@ -10,12 +10,13 @@ class Similarity:
 
     def _get_sum_vector(self, sentence: str):
         sum_vector = np.zeros(self.dim)
-        hangul = RegexParser.get_hangul(sentence)
-        print(f"{hangul}")
+        clean_sent = RegexParser.get_clean_sentence(sentence)
+
+        print(f"{clean_sent}")
 
         count = 0
 
-        for word in hangul:
+        for word in clean_sent:
             try:
                 sum_vector = np.add(sum_vector, self.model.wv[word])
                 count += 1

@@ -11,7 +11,7 @@ train_path = "../data/training_data/"
 train_data = BigCorpora(train_path, split=True)
 
 
-model_path = "./model/w2v_model"
+model_path = "./model/null_w2v_model"
 
 model = Word2Vec(sentences=train_data,
                  vector_size=300,
@@ -19,3 +19,4 @@ model = Word2Vec(sentences=train_data,
                  workers=cpu_count)
 
 model.save(model_path)
+

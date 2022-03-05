@@ -6,8 +6,8 @@ import csv
 
 
 class SoyNlpTokenizer:
-    def __init__(self, hangul_path, noun_path):
-        self.hangul_data_path = hangul_path
+    def __init__(self, clean_path, noun_path):
+        self.clean_sent_data_path = clean_path
         self.nouns_data_path = noun_path
 
     def _train_extract(self):
@@ -21,7 +21,7 @@ class SoyNlpTokenizer:
         return noun_list
 
     def _get_raw_data(self):
-        sentences = BigCorpora(self.hangul_data_path)
+        sentences = BigCorpora(self.clean_sent_data_path)
 
         return sentences
 
@@ -34,7 +34,6 @@ class SoyNlpTokenizer:
             old_nouns = CsvReader.read_file(self.nouns_data_path)
         except FileNotFoundError as e:
             print(e)
-            pass
 
         if old_nouns:
             nouns = old_nouns + new_nouns

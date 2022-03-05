@@ -12,7 +12,7 @@ from utils.reader.csv_reader import CsvReader
 class Crawler:
     def __init__(self):
         self.topics = []
-        self.filter_path = "../data/filter/crawler_filter.csv"
+        self.filter_path = "../data/filter_data/crawler_filter.csv"
 
     def naver_movie_crawler(self):
         url = "https://movie.naver.com/movie/running/current.naver"

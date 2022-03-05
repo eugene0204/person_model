@@ -8,25 +8,26 @@ from utils.regex.regex_parser import RegexParser
 import os
 
 class TextParser:
-    def __init__(self, raw_path, hangul_path):
+    def __init__(self, raw_path, clean_path):
         self.raw_data_path = raw_path
-        self.hangul_data_path = hangul_path
+        self.clean_sent_data_path = clean_path
         self.queue = Manager().Queue()
 
 
     def _read_file(self, sentences):
-        hangul_sentences = []
+        clean_sentences = []
         for sent in tqdm(sentences, desc="text parser"):
             try:
-                hangul = RegexParser.get_hangul(sent)
-                if len(hangul) > 1:
-                    hangul_sentences.append(" ".join(hangul))
+                clean_sent = RegexParser.get_clean_sentence(sent)
+
+                if len(clean_sent) > 1:
+                    clean_sentences.append(" ".join(clean_sent))
             except KeyError as e:
                 pass
 
-        hangul_sentences = list(set(hangul_sentences))
+        clean_sentences = list(set(clean_sentences))
 
-        return hangul_sentences
+        return clean_sentences
 
 
     def _read_file_with_queue(self, sentences):
@@ -34,9 +35,9 @@ class TextParser:
         p_name = current_process().name
         for sent in tqdm(sentences, desc=p_name + "-json parser"):
             try:
-                hangul = RegexParser.get_hangul(sent)
-                if len(hangul) > 1:
-                    hangul_sentences.append(" ".join(hangul))
+                clean_sent = RegexParser.get_clean_sentence(sent)
+                if len(clean_sent) > 1:
+                    hangul_sentences.append(" ".join(clean_sent))
             except KeyError as e:
                 pass
 
@@ -60,21 +61,21 @@ class TextParser:
             sent = self.queue.get()
             res.append(sent)
 
-        hangul_sentences = []
+        clean_sentences = []
         for sent in res:
             for hagul in sent:
-                hangul_sentences.append(hagul)
+                clean_sentences.append(hagul)
 
-        print(len(hangul_sentences))
-        hangul_sentences = list(set(hangul_sentences))
-        print(len(hangul_sentences))
+        print(len(clean_sentences))
+        clean_sentences = list(set(clean_sentences))
+        print(len(clean_sentences))
 
-        return hangul_sentences
+        return clean_sentences
 
-    def _write_file(self, hangul_sentences):
-        file_name = Date.get_today() + "_hagnul" + ".csv"
-        hangul_path = self.hangul_data_path + file_name
-        CsvWriter.write_csv(hangul_path, hangul_sentences)
+    def _write_file(self, clean_sentences):
+        file_name = Date.get_today() + "_clean" + ".csv"
+        clean_path = self.clean_sent_data_path + file_name
+        CsvWriter.write_csv(clean_path, clean_sentences)
 
     def start_multiprc(self):
         file_gens = self._get_file_generators(self.raw_data_path)
@@ -100,10 +101,13 @@ class TextParser:
         hangul_sentences = self._read_file(sentences)
 
         file_name = Date.get_today() + "_hagnul" + ".csv"
-        hangul_data_path = self.hangul_data_path + file_name
+        hangul_data_path = self.clean_sent_data_path + file_name
         CsvWriter.write_csv(hangul_data_path, hangul_sentences)
 
 
 if __name__ == "__main__":
-    parser = TextParser()
+    raw_data_path = "../../data/raw_data/"
+    clean_sent_data = "../../data/clean_sent_data/"
+
+    parser = TextParser(raw_data_path, clean_sent_data)
     parser.start()
