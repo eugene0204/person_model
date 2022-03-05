@@ -18,13 +18,13 @@ sentences = BigCorpora(train_path, split=True)
 
 model_path = "./model/w2v_model"
 model = Word2Vec.load(model_path)
-
-print(f"Before update:{len(model.wv)}")
+old_size = len(model.wv)
 
 model.build_vocab(sentences, update=True)
 model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
 model.save(model_path)
 
+print(f"Before update:{old_size}")
 print(f"After update:{len(model.wv)}")
 
 

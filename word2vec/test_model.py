@@ -8,11 +8,9 @@ model_name = "./model/w2v_model"
 model = KeyedVectors.load(model_name, mmap='r')
 vocab = model.wv.key_to_index
 
-test_list = ("아이폰", "푸틴", "우크라이나", "전쟁")
-
+test_list = ("단일화", )
 
 filter = Filter()
-
 
 for name in test_list:
     print(name)

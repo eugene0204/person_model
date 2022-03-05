@@ -1,13 +1,11 @@
-import os
 from utils.reader.gen_reader import BigCorpora, BigFile
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
+from utils.regex.regex_parser import RegexParser
 from tqdm import tqdm
 from multiprocessing import Pool, Queue, Process, current_process, Manager
-import multiprocessing as mp
-
+import os
 import json
-import re
 
 #For json format file
 class JsonParser:
@@ -22,7 +20,7 @@ class JsonParser:
             try:
                 json_data = json.loads(sent)
                 text = json_data['text']
-                hangul = re.findall(u'[\uAC00-\uD7A3]+', text)
+                hangul = RegexParser.get_hangul(text)
                 if len(hangul) > 1:
                     hangul_sentences.append(" ".join(hangul))
             except KeyError as e:
@@ -39,7 +37,7 @@ class JsonParser:
             try:
                 json_data = json.loads(sent)
                 text = json_data['text']
-                hangul = re.findall(u'[\uAC00-\uD7A3]+', text)
+                hangul = RegexParser.get_hangul(text)
                 if len(hangul) > 1:
                     hangul_sentences.append(" ".join(hangul))
             except KeyError as e:

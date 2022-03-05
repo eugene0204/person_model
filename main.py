@@ -9,13 +9,13 @@ def start():
     training_data_path = "./data/training_data/"
     noun_data_path = "data/noun_data/nouns.csv"
 
-    hangul_parser = TextParser(raw_path=raw_data_path, hangul_path=hangul_data_path)
+    sent_parser = TextParser(raw_path=raw_data_path, hangul_path=hangul_data_path)
     tokenizer = SoyNlpTokenizer(hangul_path=hangul_data_path, noun_path=noun_data_path)
     noun_parser = NounParser(hangul_path=hangul_data_path,
                              noun_path=noun_data_path,
                              training_path=training_data_path)
 
-    hangul_parser.start_multiprc()
+    sent_parser.start_multiprc()
     tokenizer.start()
     noun_parser.start_mutiprc()
 

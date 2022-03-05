@@ -1,5 +1,5 @@
 from gensim.models import KeyedVectors
-from utils.hangul.hangul_parser import HangulParser
+from utils.regex.regex_parser import RegexParser
 import numpy as np
 
 
@@ -10,7 +10,9 @@ class Similarity:
 
     def _get_sum_vector(self, sentence: str):
         sum_vector = np.zeros(self.dim)
-        hangul = HangulParser.get_hangul(sentence)
+        hangul = RegexParser.get_hangul(sentence)
+        print(f"{hangul}")
+
         count = 0
 
         for word in hangul:
@@ -42,7 +44,7 @@ if __name__ == "__main__":
     model_path = '../word2vec/model/w2v_model'
     sim = Similarity(model_path)
 
-    test_str = "어제 저의 1분은 故 이예람 중사를 기억하는 1분이었습니다."
+    test_str = "다시 상기시켜보면... 러시아는 내일부터 믿을게 골드랑 위안화 밖에 없음."
     res = sim.get_most_sim(test_str)
     print(res)
 

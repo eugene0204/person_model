@@ -1,6 +1,6 @@
 from sklearn.metrics.pairwise import cosine_similarity
 from gensim.models import KeyedVectors
-from utils.hangul.hangul_parser import HangulParser
+from utils.regex.regex_parser import RegexParser
 import unittest
 import numpy as np
 
@@ -48,7 +48,7 @@ class SimilarityTest(unittest.TestCase):
         model = KeyedVectors.load(model_path, mmap="r")
         sum_vec = np.zeros(300)
         count = 0
-        hangul = HangulParser.get_hangul(self.test_str)
+        hangul = RegexParser.get_hangul(self.test_str)
         print(hangul)
 
         for word in hangul:

@@ -4,8 +4,8 @@ from utils.reader.gen_reader import BigFile
 from utils.reader.gen_reader import BigCorpora
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
+from utils.regex.regex_parser import RegexParser
 import os
-import re
 
 class TextParser:
     def __init__(self, raw_path, hangul_path):
@@ -18,7 +18,7 @@ class TextParser:
         hangul_sentences = []
         for sent in tqdm(sentences, desc="text parser"):
             try:
-                hangul = re.findall(u'[\uAC00-\uD7A3]+', sent)
+                hangul = RegexParser.get_hangul(sent)
                 if len(hangul) > 1:
                     hangul_sentences.append(" ".join(hangul))
             except KeyError as e:
@@ -34,7 +34,7 @@ class TextParser:
         p_name = current_process().name
         for sent in tqdm(sentences, desc=p_name + "-json parser"):
             try:
-                hangul = re.findall(u'[\uAC00-\uD7A3]+', sent)
+                hangul = RegexParser.get_hangul(sent)
                 if len(hangul) > 1:
                     hangul_sentences.append(" ".join(hangul))
             except KeyError as e:
