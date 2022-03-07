@@ -16,8 +16,7 @@ class TestModel:
             print(name)
             try:
                 res = self.model.wv.most_similar(name, topn=100)
-                self.filter.filter_model(res)
-                print("")
+                self.filter.show_filtered_keywords(res)
                 print(res)
 
             except KeyError as e:
@@ -26,8 +25,7 @@ class TestModel:
     def show_most_similar(self, keyword):
         try:
             res = self.model.wv.most_similar(keyword, topn=100)
-            self.filter.filter_model(res)
-            print("")
+            self.filter.show_filtered_keywords(res)
             print(res)
             return
 
@@ -39,13 +37,13 @@ class TestModel:
 if __name__ == "__main__":
     model = TestModel()
     while True:
-        cmd = input(">> ")
-        if cmd == "exit":
+        keyword = input(">> ")
+        if keyword == "exit":
             break
-        elif cmd == "show":
+        elif keyword == "show":
             model.show_test_list()
-
-        model.show_most_similar(cmd)
+        else:
+            model.show_most_similar(keyword)
 
 
 

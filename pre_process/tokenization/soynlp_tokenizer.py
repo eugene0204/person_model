@@ -31,7 +31,7 @@ class SoyNlpTokenizer:
 
         old_nouns = []
         try:
-            old_nouns = CsvReader.read_file(self.nouns_data_path)
+            old_nouns = CsvReader.read_single_column(self.nouns_data_path)
         except FileNotFoundError as e:
             print(e)
 

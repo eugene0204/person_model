@@ -71,7 +71,7 @@ class NounOnlySentParser:
         return hangul_sentences
 
     def _get_nouns(self) -> set:
-        nouns = CsvReader.read_file(self.nouns_data_path)
+        nouns = CsvReader.read_single_column(self.nouns_data_path)
         return set(nouns)
 
     def _get_sentences(self):

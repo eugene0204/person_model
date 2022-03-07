@@ -12,7 +12,7 @@ from utils.reader.csv_reader import CsvReader
 class Crawler:
     def __init__(self):
         self.topics = []
-        self.filter_path = "../data/filter_data/crawler_filter.csv"
+        self.filter_path = "../data/keyword_data/crawler_keyword.csv"
 
     def naver_movie_crawler(self):
         url = "https://movie.naver.com/movie/running/current.naver"
@@ -81,7 +81,7 @@ class Crawler:
     def write_file(self):
         topics = []
         new_topics = list(set(self.topics))
-        old_topics = CsvReader.read_file(self.filter_path)
+        old_topics = CsvReader.read_single_column(self.filter_path)
 
         if old_topics:
             topics = new_topics + old_topics

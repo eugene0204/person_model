@@ -9,15 +9,14 @@ def start():
     training_data_path = "./data/training_data/"
     noun_data_path = "data/noun_data/nouns.csv"
 
-    json_sent_parser = JsonParser(raw_path=raw_data_path, clean_path=clean_sent_data_path)
-    #text_sent_parser = TextParser(raw_path=raw_data_path, clean_path=clean_sent_data_path)
+    #json_sent_parser = JsonParser(raw_path=raw_data_path, clean_path=clean_sent_data_path)
+    text_sent_parser = TextParser(raw_path=raw_data_path, clean_path=clean_sent_data_path)
     tokenizer = SoyNlpTokenizer(clean_path=clean_sent_data_path, noun_path=noun_data_path)
     noun_sent_parser = NounOnlySentParser(clean_path=clean_sent_data_path,
                                           noun_path=noun_data_path,
                                           training_path=training_data_path)
 
-    #text_sent_parser.start_multiprc()
-    json_sent_parser.start_multiprc()
+    text_sent_parser.start_multiprc()
     tokenizer.start()
     noun_sent_parser.start_mutiprc()
 

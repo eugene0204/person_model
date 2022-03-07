@@ -15,7 +15,6 @@ sentences = BigCorpora(train_path, split=True)
 # for sent in sentences:
 #     pass
 
-
 #model_path = "./model/w2v_model"
 model_path = "./model/null_w2v_model"
 

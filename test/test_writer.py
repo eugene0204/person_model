@@ -5,7 +5,7 @@ from collections import Counter
 class WriterText(unittest.TestCase):
     def setUp(self) -> None:
         self.test_lst = ['우크라이나', '우크라이나러시아전쟁', '엘든링', '토트넘', 'CNN', 'LCK', '나토', 'EPL', '맨유', '포켓몬빵']
-        self.path = "../data/filter_data/test_filter.csv"
+        self.path = "../data/keyword_data/test_keyword.csv"
 
     def test_csv_writer(self):
         with open(self.path, 'w') as file:
