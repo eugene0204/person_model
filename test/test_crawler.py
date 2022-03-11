@@ -47,7 +47,7 @@ class CrawlerTest(unittest.TestCase):
         url = 'https://m.search.zum.com/search.zum?method=uni&option=accu&qm=f_typing.top&query='
         html = requests.get(url).content
         soup = bs(html, 'html5lib')
-        keyword_list = soup.find('div', {'class': 'list_wrap animate'}).find_all('span', {'class': 'keyword'})
+        keyword_list = soup.find('div', {'class': 'list_wrap animate'}).find_all('span', {'class': 'custom'})
         result = []
         for k in keyword_list:
             text_ = k.text.strip()
@@ -75,7 +75,6 @@ class CrawlerTest(unittest.TestCase):
 
         self.topics.extend(result)
         self.assertEqual(len(self.topics), self.expected_length)
-
 
 
 if __name__ == "__main__":

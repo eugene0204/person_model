@@ -1,4 +1,5 @@
 from utils.reader.csv_reader import CsvReader
+from custom.keyword import Keyword
 import unittest
 import pandas as pd
 import os
@@ -24,6 +25,19 @@ class FilterTest(unittest.TestCase):
             my_list.extend(res[col].to_list())
 
         self.assertTrue(len(my_list) == 10)
+
+    def test_sub_match(self):
+        topic1 = Keyword('더스틴 니퍼트')
+        topic2 = Keyword('김태우 (1989년)')
+        topic3 = Keyword('더스틴 니퍼트')
+
+        filter_set = {topic1, topic2}
+
+        if filter_set.intersection(topic3):
+            print("find")
+        else:
+            print("no")
+
 
 
 

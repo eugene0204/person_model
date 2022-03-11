@@ -39,7 +39,7 @@ class Crawler:
 
         res = []
         for k in keyword_list:
-            res.append(k[1].replace(" ", ""))
+            res.append(k[1])
 
         print(res)
         self.topics.extend(res)
@@ -51,10 +51,10 @@ class Crawler:
         url = 'https://m.search.zum.com/search.zum?method=uni&option=accu&qm=f_typing.top&query='
         html = requests.get(url).content
         soup = bs(html, 'html5lib')
-        keyword_list = soup.find('div', {'class' : 'list_wrap animate'}).find_all('span', {'class' : 'keyword'})
+        keyword_list = soup.find('div', {'class' : 'list_wrap animate'}).find_all('span', {'class' : 'custom'})
         result = []
         for k in keyword_list:
-            result.append(k.text.strip().replace(" ", ""))
+            result.append(k.text.strip())
 
         print(result)
         self.topics.extend(result)
@@ -67,7 +67,7 @@ class Crawler:
         data = json.loads(str(html).split('\n')[1])
         result = []
         for i in range(10):
-            result.append(data['default']['trendingSearches'][i]['title'].replace(" ", ""))
+            result.append(data['default']['trendingSearches'][i]['title'])
         print(result)
         self.topics.extend(result)
         return result

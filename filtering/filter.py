@@ -9,10 +9,10 @@ class Filter:
         self.combined_keywords = self._combine_keywords()
 
     def _combine_keywords(self):
-        my_filter = CsvReader.read_single_column(self.my_keywords_path)
-        crawler_filter = CsvReader.read_mutil_columns(self.crawler_keywords_path)
+        my_keywords = CsvReader.read_mutil_columns(self.my_keywords_path)
+        crawler_keywords = CsvReader.read_single_column(self.crawler_keywords_path)
 
-        return list(set(my_filter + crawler_filter))
+        return list(set(my_keywords + crawler_keywords))
 
     def show_filtered_keywords(self, res):
         keywords = []

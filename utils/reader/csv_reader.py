@@ -23,7 +23,6 @@ class CsvReader:
     def read_mutil_columns(path):
         col_list = []
         try:
-
             df = pd.read_csv(path)
             for col in df:
                 col_list.extend(df[col].to_list())
@@ -31,7 +30,7 @@ class CsvReader:
         except FileNotFoundError as e:
             print(e)
 
-        return col_list
+        return list(set(col_list))
 
 
 
