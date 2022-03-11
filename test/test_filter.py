@@ -1,5 +1,5 @@
 from utils.reader.csv_reader import CsvReader
-from custom.keyword import Keyword
+from topic.keyword import Keyword
 import unittest
 import pandas as pd
 import os

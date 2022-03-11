@@ -1,5 +1,5 @@
 import unittest
-from custom.keyword import Keyword
+from topic.keyword import Keyword
 
 
 class TestKeyword(unittest.TestCase):
@@ -8,7 +8,7 @@ class TestKeyword(unittest.TestCase):
 
     def test_repr(self):
         keyword = Keyword("더스틴 니퍼트")
-        print(repr(keyword))
+        self.assertTrue(repr(keyword) == "더스틴 니퍼트")
 
     def test_equal(self):
         keyword1 = Keyword("이응준")
@@ -20,7 +20,7 @@ class TestKeyword(unittest.TestCase):
         topic1 = Keyword('더스틴 니퍼트')
         topic2 = Keyword('니퍼트')
 
-        self.assertTrue(topic2 == topic1)
+        self.assertFalse(topic2 == topic1)
 
 
     def test_hash(self):
@@ -45,13 +45,18 @@ class TestKeyword(unittest.TestCase):
         topic1 = Keyword('더스틴 니퍼트')
         topic2 = Keyword('김태우 (1989년)')
         topic3 = Keyword('더스틴')
+        topic4 = Keyword('니퍼트')
+        topic5 = Keyword('더스틴 아파트')
 
-        topic_set = {topic1, topic2}
+        Keyword.word_set.add(topic1)
+        Keyword.word_set.add(topic2)
+        Keyword.word_set.add(topic5)
 
-        inter = topic_set.intersection(topic3)
-        print(inter)
+        inter = Keyword.word_set.intersection(topic3)
+        topic = next(iter(inter))
 
         self.assertTrue(len(inter) == 1)
+        self.assertTrue(topic1.keyword or topic5.keyword in topic.rootwords)
 
 
 if __name__ == "__main__":
