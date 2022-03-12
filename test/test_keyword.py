@@ -3,8 +3,10 @@ from topic.keyword import Keyword
 
 
 class TestKeyword(unittest.TestCase):
-    def setUp(self) -> None:
-        pass
+
+    def test_bool(self):
+        keyword = Keyword("니퍼트")
+        self.assertTrue(bool(keyword))
 
     def test_repr(self):
         keyword = Keyword("더스틴 니퍼트")
