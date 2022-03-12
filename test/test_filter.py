@@ -1,8 +1,8 @@
 from utils.reader.csv_reader import CsvReader
 from topic.keyword import Keyword
+from filtering.filter import Filter
 import unittest
 import pandas as pd
-import os
 
 
 class FilterTest(unittest.TestCase):
@@ -20,7 +20,7 @@ class FilterTest(unittest.TestCase):
 
     def test_read_multiple_column(self):
         my_list = []
-        res = pd.read_csv(self.test_words_path + " hi")
+        res = pd.read_csv(self.test_words_path)
         for col in res:
             my_list.extend(res[col].to_list())
 
@@ -37,6 +37,8 @@ class FilterTest(unittest.TestCase):
             print("find")
         else:
             print("no")
+
+
 
 
 

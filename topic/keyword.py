@@ -2,7 +2,7 @@ from array import array
 
 
 class Keyword:
-    word_set = set()
+    topic_set = set()
 
     def __init__(self, keyword="", rootword=""):
         self.__keyword = keyword
@@ -38,15 +38,12 @@ class Keyword:
         split = self.keyword.split()
         if len(split) > 1:
             for word in split:
-                self.word_set.add(Keyword(word, self.keyword))
+                self.topic_set.add(Keyword(word, self.keyword))
 
         return hash(self.keyword)
 
     def __bool__(self):
         return bool(self.keyword)
-
-    def get_sub_string(self):
-        return self.sub_str
 
 
 
