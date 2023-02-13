@@ -1,6 +1,7 @@
 from sklearn.metrics.pairwise import cosine_similarity
+
 from gensim.models import KeyedVectors
-from utils.regex.regex_parser import RegexParser
+from pre_process.regex.regex_parser import RegexParser
 import unittest
 import numpy as np
 

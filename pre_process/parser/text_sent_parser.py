@@ -1,10 +1,10 @@
-from multiprocessing import Process, Queue, current_process, Manager
+from multiprocessing import Process, current_process, Manager
 from tqdm import tqdm
 from utils.reader.gen_reader import BigFile
 from utils.reader.gen_reader import BigCorpora
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
-from utils.regex.regex_parser import RegexParser
+from pre_process.regex.regex_parser import RegexParser
 import os
 
 class TextParser:
@@ -85,8 +85,8 @@ class TextParser:
             p = Process(target=self._read_file_with_queue, args=(sent, ))
             processes.append(p)
 
-        for p in processes:
-            print("process start")
+        for i, p in enumerate(processes):
+            print(f"process {i} start")
             p.start()
 
         for p in processes:

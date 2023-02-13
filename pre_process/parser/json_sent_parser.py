@@ -1,9 +1,9 @@
-from utils.reader.gen_reader import BigCorpora, BigFile
+from utils.reader.gen_reader import BigFile
 from utils.writer.csv_writer import CsvWriter
 from utils.date.date import Date
-from utils.regex.regex_parser import RegexParser
+from pre_process.regex.regex_parser import RegexParser
 from tqdm import tqdm
-from multiprocessing import Pool, Queue, Process, current_process, Manager
+from multiprocessing import Process, current_process, Manager
 import os
 import json
 

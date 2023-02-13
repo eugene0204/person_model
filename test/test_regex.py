@@ -1,6 +1,6 @@
 import unittest
 import re
-from utils.regex.regex_parser import RegexParser
+from pre_process.regex.regex_parser import RegexParser
 from collections import Counter
 
 

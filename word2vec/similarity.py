@@ -1,11 +1,11 @@
 from gensim.models import KeyedVectors
-from utils.regex.regex_parser import RegexParser
+from pre_process.regex.regex_parser import RegexParser
 from utils.reader.csv_reader import CsvReader
 import numpy as np
 
 
 class Similarity:
-    def __init__(self, model_path, noun_set:set):
+    def __init__(self, model_path, noun_set: set):
         self.model = KeyedVectors.load(model_path)
         self.dim = 300
         self.noun_set = noun_set

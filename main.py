@@ -6,8 +6,8 @@ from pre_process.tokenization.soynlp_tokenizer import SoyNlpTokenizer
 def start():
     raw_data_path = "./data/raw_data/"
     clean_sent_data_path = "./data/clean_sent_data/"
-    training_data_path = "./data/training_data/"
     noun_data_path = "data/noun_data/nouns.csv"
+    training_data_path = "./data/training_data/"
 
     #json_sent_parser = JsonParser(raw_path=raw_data_path, clean_path=clean_sent_data_path)
     text_sent_parser = TextParser(raw_path=raw_data_path, clean_path=clean_sent_data_path)
